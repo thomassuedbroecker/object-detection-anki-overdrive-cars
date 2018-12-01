@@ -297,3 +297,31 @@ Change the lines 63ff with your own IoT configuration.
 Redeploy the app to your iOS device.
 
 Rather than using the Node-RED flow of the original [project](https://github.com/IBM-Bluemix/node-mqtt-for-anki-overdrive) you need to deploy the version from this project [node-red-flow](node-red-flow) to your Node-RED instance.
+
+# Findings
+
+## Problems
+
+### Problem 01
+
+Installation using command:
+```sh
+$ tensorflow/contrib/makefile/build_all_ios.sh
+```
+
+```sh
+/build_all_ios.sh 
+xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools), missing xcrun at: /Library/Developer/CommandLineTools/usr/bin/xcrun
+```
+
+https://apple.stackexchange.com/questions/254380/macos-mojave-invalid-active-developer-path
+
+```sh
+xcrun: error: SDK "iphoneos" cannot be located
+xcrun: error: SDK "iphoneos" cannot be located
+xcrun: error: unable to lookup item 'PlatformPath' in SDK 'iphoneos'
+```
+
+https://github.com/theos/theos/issues/322
+
+_Seems this happens with Xcode 9 or macOS 10.13 if you previously had the standalone Command Line Tools package installed. Open Xcode and go to Preferences, then Locations, and make sure the command line tools is set to the version of Xcode you’re using._
